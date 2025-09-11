@@ -1,1 +1,4 @@
 *.pth
+test.py
+test.ipynb
+!model_epoch_200.pth

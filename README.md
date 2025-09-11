@@ -1,16 +1,16 @@
-# BaseTransformer：文本翻译模型入门实现
+# BaseTransformer：文本翻译模型以及文本生成模型入门实现
 
 ## 项目简介
 
-本项目是面向 **Transformer 初学者**的入门级学习实践，通过手动实现基础架构的 Transformer 文本翻译模型（中英方向），帮助初学者理解 Transformer 的核心原理（尤其是多头注意力机制），并对比 PyTorch 官方库接口的使用方式。
+本项目是面向 **Transformer 初学者**的入门级学习实践，通过手动实现基础架构的 Transformer 文本翻译模型（中英方向）以及 Transformer 模型变体（文本翻译），帮助初学者理解 Transformer 的核心原理（尤其是多头注意力机制），并对比 PyTorch 官方库接口的使用方式。
 
-项目定位为「学习型 Demo」，不追求生产级性能，而是聚焦于**模型架构拆解、关键模块实现细节、训练推理流程梳理**，适合刚接触 Transformer 的开发者入门参考。
+项目定位为「学习型 Demo」，不追求生产级性能，而是聚焦于**模型架构拆解、关键模块实现细节、训练推理流程梳理**，适合刚接触 Transformer 的开发者入门参考。以下主要以文本翻译项目为例说明。
 
 ## 数据集说明
 
 ### 数据来源
 
-本项目使用的基准数据集来源于国际顶级机器翻译评测任务 **WMT 2021 News Translation Task**（[官方链接](https://www.statmt.org/wmt21/translation-task.html)），该数据集由多个权威平行语料库整合而成，包括：
+文本翻译使用的基准数据集来源于国际顶级机器翻译评测任务 **WMT 2021 News Translation Task**（[官方链接](https://www.statmt.org/wmt21/translation-task.html)），该数据集由多个权威平行语料库整合而成，包括：
 
 - ParaCrawl（网页平行语料）
 - News-Commentary（新闻评论平行语料）
@@ -21,15 +21,43 @@
 
 原始数据集包含 **2500 万+ 中英双语句对**，覆盖新闻、百科、官方文档等多种场景，具备良好的语言多样性。
 
+文本生成数据集（[官方链接](https://github.com/liuhuanyong/MusicLyricChatbot)）包含以下几个字段：
+
+- singer: 歌手名
+- album: 专辑
+- song: 歌曲名称
+- author: 作词者
+- composer: 作曲者
+  整个歌曲信息文件包含 140068 首歌曲 ，示例如下：
+
+```
+{　　"_id" : { "$oid" : "5bbdf280831b976548aa1509" },
+    "singer" : "张学友",
+    "song" : "耐人寻味",
+    "geci" : [
+            "在每个佳节 亦送上鲜花", "还常来电话 留言传达我牵挂", "在每次分散 亦送你归家", "无聊时玩耍 忘形时
+            候说婚嫁", "*如最美满爱情 以这一生作保证", "说到最煽情 而你却说你清醒*", "这一宵 我再次借酒消愁 仍难忘透
+            ", "我有哪里错漏 错要提分手", "这一天 对我有哪些要求 何妨直说", "你却说到以后 变做什么好友", "假使间 我很
+            丑也不温柔 如何闷透", "你也说个理由 免我撒赖不走", "想不到 每到了紧要关头 词难达意", "我要对你挽留 却愤怒
+            转身走", "是你太高贵 是我也潇洒", "和谐如像完 就算闲日会吵架", "望戏里主角 换上了婚纱", "何妨来玩耍 问你
+            何日会想嫁" ],
+    "composer" : "",
+    "author" : "劳子",
+    "album" : "《Jacky Cheung 15-Disc2》"
+}
+```
+
 ### 项目使用数据集
 
-为平衡「演示效率」与「模型泛化能力」，项目提供两个子数据集，存放于 `data/translate/` 目录下：
+对于文本翻译项目，为平衡「演示效率」与「模型泛化能力」，项目提供两个子数据集，存放于 `data/translate/` 目录下：
 | 文件名 | 数据量 | 用途 |
 |--------|--------|------|
 | `TranslationData.csv` | 2 万条双语句对 | 基础演示、快速验证模型流程（训练耗时短，适合调试） |
 | `2m_WMT21.csv` | 200 万条双语句对 | 提升模型泛化能力（数据量更大，训练后模型适配更多语言场景） |
 
 > 注：所有数据集已预处理为「中文句子（空格分词）,英文句子（空格分词）」的 CSV 格式，可直接通过`TranslationDataset`类加载。
+
+对于文本生成所用到的歌词文件，项目已将源 json 中的所有中文歌词提取出来，并存放于`data/generate/` 目录下
 
 ## 代码结构与说明
 
@@ -129,5 +157,4 @@ print("英文翻译:", " ".join([token for token in result if token not in ["<bo
 2. PyTorch 官方文档：[nn.Transformer](https://pytorch.org/docs/stable/generated/torch.nn.Transformer.html)
 3. WMT 2021 任务说明：[WMT21 Translation Task Overview](https://www.statmt.org/wmt21/pdf/2021.wmt-1.100.pdf)
 
-通过本项目的手动实现与官方接口对比，可快速建立对 Transformer 的直观理解，为后续学习更复杂的变体（如 BERT、GPT）打下基础。
-
+通过本项目的手动实现与官方接口对比，可快速建立对 Transformer 的直观理解，为后续学习打下基础。
