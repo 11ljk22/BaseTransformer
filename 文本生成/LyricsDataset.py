@@ -22,23 +22,6 @@ class LyricsDataset(Dataset):
         )
 
         self.index_data = self.get_index_data()
-        self.batch_max_length = self.get_batch_max_length()
-
-    def get_batch_max_length(self):
-        num_samples = self.__len__()
-        batch_length = []
-        if num_samples % self.batch_size == 0:
-            num_batch = num_samples // self.batch_size
-        else:
-            num_batch = (num_samples // self.batch_size) + 1
-
-        for batch in range(num_batch):
-            batch_df = self.df.iloc[
-                batch * self.batch_size : (batch + 1) * self.batch_size, :
-            ]
-            batch_max_length = len(max(line for line in batch_df.values).item())
-            batch_length.append(batch_max_length)
-        return batch_length
 
     def get_index_data(self):
         index_data = []
@@ -62,7 +45,6 @@ class LyricsDataset(Dataset):
             df = pd.read_csv(file_path, nrows=self.nrows)
         else:
             df = pd.read_csv(file_path)
-        self.df = df
         # 返回字符列表和原始行
         data = df.values.reshape(-1)
         return [char for line in data for char in line], data
@@ -91,40 +73,41 @@ class LyricsDataset(Dataset):
         return token_to_index, index_to_token, chars, data
 
     def __getitem__(self, index):
-        batch = index // self.batch_size
-        batch_max_length = self.batch_max_length[batch]
-
+        # 我们使用collate_fn将批次中的所有样本补充到同一个长度
         original_seq = self.index_data[index]
-        # 输入序列：去掉 <eos>
         src_seq = original_seq[:-1]
-        src_padded = pad(
-            torch.tensor(src_seq, dtype=torch.long),
-            (0, batch_max_length - len(src_seq)),
-            value=self.token_to_index["<pad>"],
-        )
-
-        # 目标序列：去掉 <bos>
         tgt_seq = original_seq[1:]
-        tgt_padded = pad(
-            torch.tensor(tgt_seq, dtype=torch.long),
-            (0, batch_max_length - len(tgt_seq)),
-            value=self.token_to_index["<pad>"],
+        return torch.tensor(src_seq, dtype=torch.long), torch.tensor(
+            tgt_seq, dtype=torch.long
         )
-
-        return src_padded, tgt_padded
 
     def __len__(self):
         return len(self.index_data)
+
+    def collate_fn(self, batch):
+        """动态批次长度，这个函数可被指定为DataLoader数据加载器的collate_fn参数"""
+        batch_max_length = max(max(len(src), len(tgt)) for src, tgt in batch)
+        batch_src, batch_tgt = [], []
+        pad_idx = self.token_to_index["<pad>"]
+        for src, tgt in batch:
+            batch_src.append(pad(src, (0, batch_max_length - len(src)), value=pad_idx))
+            batch_tgt.append(pad(tgt, (0, batch_max_length - len(tgt)), value=pad_idx))
+        return torch.stack(batch_src), torch.stack(batch_tgt)
 
 
 if __name__ == "__main__":
     batch_size = 32
     dataset = LyricsDataset(
-        "./data/generate/lyrics.csv", batch_size=batch_size, nrows=10000
+        "./data/generate/lyrics.csv", batch_size=batch_size, nrows=100
     )
     from torch.utils.data import DataLoader
 
-    print(dataset.batch_max_length)
-    dataloader = DataLoader(dataset, batch_size=batch_size)
+    pad_idx = dataset.token_to_index["<pad>"]
+    print(pad_idx)
+    dataloader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        collate_fn=dataset.collate_fn,
+    )
     for src, tgt in dataloader:
         print(src.shape, tgt.shape)
