@@ -6,11 +6,11 @@ from torch.utils.data import Dataset
 
 class LyricsDataset(Dataset):
     def __init__(
-        self,
-        file_path: str,
-        separator: str = "，",
-        nrows: int = 300,
-        batch_size: int = 32,
+            self,
+            file_path: str,
+            separator: str = "，",
+            nrows: int = 300,
+            batch_size: int = 32,
     ):
         super().__init__()
         self.separator = separator
@@ -32,7 +32,7 @@ class LyricsDataset(Dataset):
             tmp = [self.token_to_index["<bos>"]]
             for token in tokens:
                 # 添加对未知token的处理
-                token_idx = self.token_to_index.get(token)
+                token_idx = self.token_to_index.get(token, self.token_to_index["<unk>"])
                 if token_idx is None:
                     token_idx = self.token_to_index["<unk>"]
                 tmp.append(token_idx)

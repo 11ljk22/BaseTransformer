@@ -1,4 +1,4 @@
 *.pth
-test.py
+train.py
 test.ipynb
 !model_epoch_200.pth

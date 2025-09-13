@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2636ed7e-343b-4de0-a013-5712051199e2" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/generate/lyrics.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/generate/lyrics.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/文本生成/LyricsDataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/文本生成/LyricsDataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/文本生成/TextGenerate.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/文本生成/TextGenerate.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/文本生成/TorchOfficialGenerate.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/文本生成/TorchOfficialGenerate.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/文本生成/微调.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/文本生成/微调.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/文本翻译/BaseTransformer.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/文本翻译/BaseTransformer.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/文本翻译/TorchOfficialTransformer.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/文本翻译/TorchOfficialTransformer.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +81,7 @@
       <workItem from="1757407088248" duration="212000" />
       <workItem from="1757408319439" duration="302000" />
       <workItem from="1757593857414" duration="969000" />
+      <workItem from="1757743724917" duration="15537000" />
     </task>
     <servers />
   </component>
