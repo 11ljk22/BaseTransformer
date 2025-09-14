@@ -174,7 +174,7 @@ print("英文翻译:", " ".join([token for token in result if token not in ["<bo
 
 - 小批量快速验证（使用 `nrows` 参数限制数据量，快速测试模型是否收敛）
 - 全量数据训练（使用 14 万+ 歌词数据提升生成质量）
-- 可控文本生成（通过输入前缀、调整温度参数 `tempreture` 控制生成多样性）
+- 可控文本生成（通过输入前缀、调整温度参数 `temperature` 控制生成多样性）
 
 ### 使用说明
 
@@ -230,7 +230,7 @@ generated = predict(
     device="cuda",
     to_index=dataset.token_to_index,
     to_token=dataset.index_to_token,
-    tempreture=0.95
+    temperature=0.95
 )
 # 输出结果
 print("生成歌词:", generated)
@@ -239,7 +239,7 @@ print("生成歌词:", generated)
 ##### 注意事项
 
 1. **输入格式**：前缀文本需用 `separator`（默认"/"）分割分句开头，模型会按顺序生成连贯内容
-2. **温度参数**：`tempreture` 越小生成结果越稳定（重复度可能较高），越大越多样（可能出现不合理字符）
+2. **温度参数**：`temperature` 越小生成结果越稳定（重复度可能较高），越大越多样（可能出现不合理字符）
 3. **设备配置**：建议使用 GPU 训练，全量数据（2 万首歌词）训练约 20-30 小时（视 GPU 性能而定）
 4. **生成长度**：`max_length` 控制最大生成字符数，达到该长度或生成 `<eos>` 标记时停止
 5. **过拟合处理**：若训练损失低但生成质量差，可增大 `dropout` 或减少 `num_layers` 缓解过拟合
