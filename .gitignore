@@ -2,3 +2,6 @@
 train.py
 test.ipynb
 !model_epoch_200.pth
+!best_lyrics_model.pth
+!best_lyrics_gpt2_model.pth
+**/checkpoints/

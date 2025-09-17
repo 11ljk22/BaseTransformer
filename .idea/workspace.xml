@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2636ed7e-343b-4de0-a013-5712051199e2" name="更改" comment="Top-K采样">
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
+    <list default="true" id="2636ed7e-343b-4de0-a013-5712051199e2" name="更改" comment="Top-P采样">
+      <change afterPath="$PROJECT_DIR$/logs/events.out.tfevents.1758038610.LAPTOP-DB61C4EP.8528.6" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/runs/histogram_demo/events.out.tfevents.1758038484.LAPTOP-DB61C4EP.8528.3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/文本生成/微调.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/文本生成/微调.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/文本生成/解码策略.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/文本生成/解码策略.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,6 +52,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;E:/Code/BaseTransformer&quot;,
@@ -95,7 +96,11 @@
       <workItem from="1757836995716" duration="2928000" />
       <workItem from="1757850570075" duration="10822000" />
       <workItem from="1757863464399" duration="2250000" />
-      <workItem from="1757925026706" duration="10214000" />
+      <workItem from="1757925026706" duration="10580000" />
+      <workItem from="1757949511539" duration="1205000" />
+      <workItem from="1757996527009" duration="170000" />
+      <workItem from="1758032018344" duration="2357000" />
+      <workItem from="1758038158833" duration="487000" />
     </task>
     <task id="LOCAL-00001" summary="束搜索">
       <option name="closed" value="true" />
@@ -113,7 +118,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757865616712</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Top-P采样">
+      <option name="closed" value="true" />
+      <created>1757949015768</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1757949015768</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,8 +144,10 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="束搜索" />
     <MESSAGE value="Top-K采样" />
-    <option name="LAST_COMMIT_MESSAGE" value="Top-K采样" />
+    <MESSAGE value="Top-P采样" />
+    <option name="LAST_COMMIT_MESSAGE" value="Top-P采样" />
   </component>
 </project>

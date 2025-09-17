@@ -1,3 +1,4 @@
 data/translate/2m_WMT21.csv filter=lfs diff=lfs merge=lfs -text
 model_epoch_200.pth filter=lfs diff=lfs merge=lfs -text
-/checkpoints/
+best_lyrics_model.pth filter=lfs diff=lfs merge=lfs -text
+best_lyrics_gpt2_model.pth filter=lfs diff=lfs merge=lfs -text
